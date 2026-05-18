@@ -1,0 +1,62 @@
+{
+  "name": "Dharanitharan P",
+  "title": "Backend Engineer",
+  "tagline": "Building the rails that move money.",
+  "roles": [
+    "FinTech Backend Engineer",
+    "Payment Systems Architect",
+    "Distributed Systems Engineer",
+    "Go (Golang) & JVM Backend Specialist"
+  ],
+  "summary": "Backend engineer specializing in high-throughput fintech infrastructure. I build payment orchestration systems, payout engines, and resilient data flows designed to stay correct under failure and scale.",
+  "longBio": "I focus on the layers of fintech that operate behind the UI — orchestration systems, settlement pipelines, idempotent workflows, and distributed state management. My approach prioritizes correctness under stress: handling retries, race conditions, partial failures, and external system instability. I design systems assuming failure is inevitable, ensuring consistency, traceability, and recovery across every transaction lifecycle.",
+  "location": "Bengaluru, Karnataka, India",
+  "email": "dharanitharanps@gmail.com",
+  "phone": "+91-6383217822",
+  "availability": "Open to high-impact backend and fintech engineering roles",
+  "languages": ["English (Proficient)", "Tamil (Native)"],
+  "social": {
+    "github": "https://github.com/DeveloperTharan",
+    "linkedin": "https://linkedin.com/in/dharanitharan-p"
+  },
+  "avatar": "/thxran.jpeg",
+  "metrics": [
+    {
+      "value": "100×",
+      "label": "Throughput scaling",
+      "sub": "Optimized payout processing systems"
+    },
+    {
+      "value": "<1s",
+      "label": "API latency (p95)",
+      "sub": "Optimized internal services"
+    },
+    {
+      "value": "4",
+      "label": "Payment rails integrated",
+      "sub": "IMPS · NEFT · RTGS · UPI"
+    },
+    {
+      "value": "10K/s+",
+      "label": "Event throughput",
+      "sub": "Messaging & CPaaS systems"
+    }
+  ],
+  "principles": [
+    {
+      "icon": "Shield",
+      "title": "Correctness over cleverness",
+      "body": "Idempotency, reconciliation, and failure handling are core system guarantees, not add-ons."
+    },
+    {
+      "icon": "Activity",
+      "title": "Measure before you optimize",
+      "body": "Latency distributions and system metrics drive every performance decision."
+    },
+    {
+      "icon": "Workflow",
+      "title": "Design for failure",
+      "body": "Systems are built assuming downstream failures, retries, and partial success scenarios."
+    }
+  ]
+}

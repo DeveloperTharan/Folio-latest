@@ -1,0 +1,94 @@
+[
+  {
+    "category": "Core Languages",
+    "icon": "Code2",
+    "items": [
+      { "name": "Go (Golang)", "level": "primary" },
+      { "name": "Java (JVM Ecosystem)", "level": "primary" },
+      { "name": "TypeScript (Typed JavaScript)", "level": "proficient" },
+      { "name": "JavaScript (ES6+)", "level": "proficient" },
+      { "name": "SQL (Relational Query Language)", "level": "proficient" }
+    ]
+  },
+  {
+    "category": "Backend & Distributed Systems",
+    "icon": "Server",
+    "items": [
+      { "name": "Distributed Systems Design", "level": "primary" },
+      { "name": "Event-Driven Architecture", "level": "primary" },
+      { "name": "High-Throughput API Systems (REST/gRPC)", "level": "primary" },
+      { "name": "Concurrency & Parallelism (Go)", "level": "primary" },
+      { "name": "Fault Tolerance & Resilient Systems", "level": "primary" }
+    ]
+  },
+  {
+    "category": "Architecture Patterns",
+    "icon": "Layers",
+    "items": [
+      {
+        "name": "Saga Pattern (Orchestration/Choreography)",
+        "level": "proficient"
+      },
+      { "name": "CQRS", "level": "proficient" },
+      { "name": "Retry & Backoff Strategies", "level": "primary" },
+      { "name": "Circuit Breaker & Rate Limiting", "level": "primary" },
+      { "name": "Idempotent System Design", "level": "primary" }
+    ]
+  },
+  {
+    "category": "FinTech Infrastructure",
+    "icon": "CircuitBoard",
+    "items": [
+      { "name": "Payment Orchestration (Pay-in/Payout)", "level": "primary" },
+      { "name": "Ledgering (Double-Entry Systems)", "level": "primary" },
+      { "name": "Reconciliation & Settlement Systems", "level": "proficient" },
+      { "name": "Liquidity & Prefunding Systems", "level": "primary" }
+    ]
+  },
+  {
+    "category": "Data & Performance Layer",
+    "icon": "Database",
+    "items": [
+      { "name": "PostgreSQL (High-Performance Design)", "level": "primary" },
+      { "name": "Redis (Caching & Distributed Locks)", "level": "primary" },
+      { "name": "Data Modeling & Consistency Patterns", "level": "primary" }
+    ]
+  },
+  {
+    "category": "Messaging & Integration",
+    "icon": "Network",
+    "items": [
+      { "name": "Kafka (Event Streaming)", "level": "primary" },
+      { "name": "gRPC (Internal Communication)", "level": "proficient" },
+      { "name": "Webhooks & External Integrations", "level": "primary" }
+    ]
+  },
+  {
+    "category": "Reliability & Observability",
+    "icon": "Activity",
+    "items": [
+      { "name": "Structured Logging", "level": "primary" },
+      { "name": "Metrics & Monitoring", "level": "proficient" },
+      { "name": "Distributed Tracing", "level": "proficient" },
+      { "name": "Failure Analysis & Debugging", "level": "primary" }
+    ]
+  },
+  {
+    "category": "Security & Compliance",
+    "icon": "Shield",
+    "items": [
+      { "name": "API Security (Auth, JWT, OAuth)", "level": "proficient" },
+      { "name": "Data Protection & Encryption", "level": "proficient" },
+      { "name": "KYC/AML System Awareness", "level": "proficient" }
+    ]
+  },
+  {
+    "category": "Engineering Environment",
+    "icon": "Wrench",
+    "items": [
+      { "name": "Docker", "level": "proficient" },
+      { "name": "Linux Systems", "level": "proficient" },
+      { "name": "Git & Version Control", "level": "primary" }
+    ]
+  }
+]

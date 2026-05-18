@@ -1,0 +1,173 @@
+[
+  {
+    "id": "payout-orchestration",
+    "title": "Multi-Bank Payout Orchestration",
+    "subtitle": "Cost-aware routing with health-based failover",
+    "category": "Payment Infrastructure",
+    "complexity": "High",
+    "stack": ["Go", "Kafka", "Redis", "PostgreSQL"],
+    "components": [
+      "Orchestrator",
+      "Smart Router",
+      "IFT Cost Engine",
+      "TPS Throttle",
+      "Bank Adapters"
+    ],
+    "challenges": [
+      "Selecting cheapest healthy rail in real-time under fluctuating bank health",
+      "Enforcing per-bank throughput contracts without dropping traffic",
+      "Handling partner downtime without impacting transaction flow"
+    ],
+    "decisions": [
+      "Sliding-window rate limiter per bank to enforce SLA boundaries",
+      "Dynamic cost matrix recalculated on health and latency signals",
+      "Priority-based failover with circuit breaker guards"
+    ],
+    "failureHandling": [
+      "Automatic failover to secondary banks on timeout/error thresholds",
+      "Retry pipeline for transient bank failures",
+      "Dead-letter queue for unresolved transactions"
+    ],
+    "outcome": "Sustained high-throughput payouts with sub-second routing decisions and no single point of failure",
+    "diagram": "payout"
+  },
+  {
+    "id": "wallet-locking",
+    "title": "Concurrent Wallet with Distributed Locking",
+    "subtitle": "Consistency-first balance management under contention",
+    "category": "Financial Consistency",
+    "complexity": "High",
+    "stack": ["Go", "Redis", "PostgreSQL"],
+    "components": ["Wallet Service", "Redis Lock", "Fencing Tokens", "Ledger"],
+    "challenges": [
+      "Concurrent debit/credit operations on the same wallet",
+      "Lock holder failures mid-transaction",
+      "Stale writes due to network delays or retries"
+    ],
+    "decisions": [
+      "Redis SETNX with TTL for distributed locking",
+      "Fencing tokens to prevent stale writes",
+      "PostgreSQL as source of truth with transactional guarantees"
+    ],
+    "failureHandling": [
+      "TTL-based lock expiry for crash recovery",
+      "Transaction rollback on partial failures",
+      "Idempotent retry handling"
+    ],
+    "outcome": "Strong consistency guarantees with safe concurrent transaction handling under load",
+    "diagram": "wallet"
+  },
+  {
+    "id": "retry-dlq",
+    "title": "Async Retry & Dead-Letter Pipeline",
+    "subtitle": "Reliable transaction state resolution",
+    "category": "Reliability Engineering",
+    "complexity": "Medium",
+    "stack": ["Kafka", "Go"],
+    "components": ["Retry Topic", "Worker Pool", "Backoff Scheduler", "DLQ"],
+    "challenges": [
+      "Handling asynchronous bank responses without blocking flows",
+      "Distinguishing transient vs permanent failures",
+      "Avoiding infinite retry loops"
+    ],
+    "decisions": [
+      "Exponential backoff strategy with capped retries",
+      "State-based acknowledgment for successful completion",
+      "DLQ routing for manual intervention"
+    ],
+    "failureHandling": [
+      "Retry with increasing delay for transient errors",
+      "Dead-letter queue for terminal failures",
+      "Operational visibility for manual resolution"
+    ],
+    "outcome": "Near-complete transaction resolution with no long-lived in-flight states",
+    "diagram": "retry"
+  },
+  {
+    "id": "rate-limiting",
+    "title": "Sliding-Window Rate Limiter",
+    "subtitle": "Precise throughput control across banks and merchants",
+    "category": "Traffic Control",
+    "complexity": "Medium",
+    "stack": ["Redis", "Go"],
+    "components": ["Quota Engine", "Redis Sorted Set", "Window Pruner"],
+    "challenges": [
+      "Strict bank TPS enforcement without burst violations",
+      "Multi-tenant throughput isolation",
+      "Low-latency decision making under load"
+    ],
+    "decisions": [
+      "Sliding-window log using Redis sorted sets",
+      "Per-entity quota enforcement (bank + merchant)",
+      "O(log N) request admission checks"
+    ],
+    "failureHandling": [
+      "Graceful rejection when limits exceeded",
+      "Backpressure signaling upstream",
+      "Fallback routing to alternate banks"
+    ],
+    "outcome": "Consistent SLA adherence with controlled traffic shaping",
+    "diagram": "ratelimit"
+  },
+  {
+    "id": "liquidity-balancing",
+    "title": "Liquidity & Prefunding Distribution",
+    "subtitle": "Dynamic capital allocation across banking partners",
+    "category": "Capital Efficiency",
+    "complexity": "High",
+    "stack": ["Go", "PostgreSQL"],
+    "components": [
+      "Utilization Tracker",
+      "Allocation Engine",
+      "Rebalancer",
+      "Health Monitor"
+    ],
+    "challenges": [
+      "Balancing idle capital vs transaction failure risk",
+      "Adapting to real-time bank performance changes",
+      "Preventing fund exhaustion during traffic spikes"
+    ],
+    "decisions": [
+      "Weighted allocation using TPS, success rate, and cost",
+      "Continuous rebalancing based on utilization signals",
+      "Threshold-based alerts and automated top-ups"
+    ],
+    "failureHandling": [
+      "Fallback routing on low balance",
+      "Pre-emptive rebalancing to avoid failures",
+      "Alerting for manual intervention"
+    ],
+    "outcome": "Optimized capital utilization with stable transaction success rates",
+    "diagram": "liquidity"
+  },
+  {
+    "id": "idempotency-layer",
+    "title": "Idempotent Payment Processing Layer",
+    "subtitle": "Exactly-once semantics over unreliable networks",
+    "category": "Transaction Integrity",
+    "complexity": "High",
+    "stack": ["Go", "Redis", "PostgreSQL"],
+    "components": [
+      "Idempotency Key Store",
+      "Request Hashing",
+      "Response Cache"
+    ],
+    "challenges": [
+      "Duplicate requests from retries or client errors",
+      "Network timeouts leading to uncertain transaction states",
+      "Preventing double debit/credit scenarios"
+    ],
+    "decisions": [
+      "Idempotency keys with request fingerprint validation",
+      "Cached response replay for duplicate requests",
+      "Write-before-process pattern to guarantee uniqueness"
+    ],
+    "failureHandling": [
+      "Safe retries return previous response",
+      "Conflict detection for mismatched payloads",
+      "Fallback to reconciliation for uncertain states"
+    ],
+    "outcome": "Exactly-once transaction guarantees across retries and failures",
+    "diagram": "idempotency"
+  }
+]

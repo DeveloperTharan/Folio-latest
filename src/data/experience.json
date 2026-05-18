@@ -1,0 +1,73 @@
+[
+  {
+    "id": "antique-2025",
+    "company": "Antique Network Solutions Pvt Ltd",
+    "role": "Backend Engineer",
+    "period": "Feb 2025 — Present",
+    "current": true,
+    "products": ["PayFin (Primary)", "ChitChaat (Secondary)"],
+    "location": "Bengaluru, IN",
+    "groups": [
+      {
+        "title": "PayFin — Payout Infrastructure",
+        "highlights": [
+          "Architected and owned a multi-bank payout orchestration system with cost-aware routing, automated failover, and retry pipelines, eliminating single points of failure.",
+          "Designed liquidity and prefunding distribution engine, dynamically allocating capital across banks using real-time utilization, success rate, and cost signals.",
+          "Scaled payout throughput from 10 → 1000 TPS using horizontal scaling, async pipelines, and database/query optimizations.",
+          "Built concurrency-safe wallet system using Redis distributed locking and PostgreSQL ledger to ensure consistent debit/credit operations.",
+          "Implemented sliding-window rate limiting enforcing per-bank and per-merchant TPS contracts without upstream SLA violations"
+        ]
+      },
+      {
+        "title": "PayFin — Pay-in Systems",
+        "highlights": [
+          "Scaled pay-in infrastructure to 200 TPS by optimizing checkout orchestration, async processing, and webhook handling.",
+          "Designed unified abstraction layer integrating multiple acquiring banks (CUB, Axis, Jio) across UPI, cards, and netbanking.",
+          "Built intelligent payment routing and ranking engine improving transaction success rates across payment methods"
+        ]
+      },
+      {
+        "title": "ChitChaat — Messaging Infrastructure",
+        "highlights": [
+          "Engineered high-throughput messaging backend handling 10K+ events/sec using Kafka and gRPC across SMS, WhatsApp, and RCS channels.",
+          "Implemented provider failover and credit-based routing ensuring reliable message delivery under provider instability"
+        ]
+      }
+    ],
+    "impact": [
+      "Scaled payout throughput to 1000 TPS",
+      "Handled 10K+ messaging events/sec",
+      "Integrated 4+ banking rails with failover"
+    ],
+    "stack": [
+      "Go (Golang)",
+      "Gin",
+      "Java (Spring Boot)",
+      "Redis",
+      "Kafka",
+      "PostgreSQL",
+      "gRPC"
+    ]
+  },
+  {
+    "id": "indusspay-2024",
+    "company": "Indusspay / Primeindus Fintech Solutions",
+    "role": "Software Engineer",
+    "period": "Jan 2024 — Jan 2025",
+    "current": false,
+    "products": ["UPI Pay-in & Payout APIs"],
+    "location": "Bengaluru, IN",
+    "groups": [
+      {
+        "title": "Payment APIs & Core Systems",
+        "highlights": [
+          "Developed UPI pay-in and payout APIs with idempotency guarantees, callback handling, and reconciliation hooks for reliable transaction processing.",
+          "Designed webhook-driven event flows enabling real-time merchant synchronization with terminal transaction states.",
+          "Implemented retry and failover mechanisms for payment callbacks with structured logging and observability.",
+          "Optimized API performance and database access using indexing, connection reuse, and caching strategies"
+        ]
+      }
+    ],
+    "stack": ["Go (Golang)", "Java", "PostgreSQL", "Redis", "REST APIs"]
+  }
+]

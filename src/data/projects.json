@@ -1,0 +1,150 @@
+[
+  {
+    "id": "payfin-payout",
+    "name": "PayFin — Payout Engine",
+    "category": "Payment Infrastructure",
+    "status": "production",
+    "year": "2025",
+    "summary": "Multi-bank orchestration engine with smart routing, failover, IFT cost optimization, and prefunding distribution.",
+    "description": "A horizontally-scaled payout platform that abstracts partner-specific quirks behind a unified contract. Smart router picks the cheapest healthy rail per transaction; each bank has its own sliding-window throttle and TPS contract.",
+    "features": [
+      "Multi-bank smart routing with health checks",
+      "IFT cost-optimized rail selection",
+      "Automated failover on partner downtime",
+      "Sliding-window rate limiting per bank",
+      "Queue-based status polling with exponential backoff",
+      "Liquidity rebalancing across partners"
+    ],
+    "architecture": "Java · Redis locks · PostgreSQL ledger",
+    "impact": [
+      { "metric": "1000", "label": "TPS sustained" },
+      { "metric": "0", "label": "Single points of failure" },
+      { "metric": "4", "label": "Rails (IMPS/NEFT/RTGS/UPI)" }
+    ],
+    "stack": ["Go", "Gin", "Redis", "Kafka", "PostgreSQL"],
+    "links": { "github": null, "live": null, "case_study": null }
+  },
+  {
+    "id": "payfin-upi",
+    "name": "UPI Pay-in / Payout APIs",
+    "category": "Payment Infrastructure",
+    "status": "production",
+    "year": "2024",
+    "summary": "Production UPI APIs powering merchant transaction flows with idempotency, callbacks, and reconciliation.",
+    "description": "Core UPI rails for merchant pay-in and payout. Idempotency keys prevent duplicates; callbacks and reconciliation hooks ensure consistent ledger state across systems.",
+    "features": [
+      "UPI Pay-in & Payout endpoints",
+      "Idempotency-key duplicate prevention",
+      "Webhook-driven status sync",
+      "Callback retry with structured observability",
+      "Multi-mode payment contracts",
+      "Reconciliation hooks"
+    ],
+    "architecture": "Go / Java APIs · PostgreSQL · Redis cache · webhook queues",
+    "impact": [
+      { "metric": "Prod", "label": "Merchant integrations" },
+      { "metric": "0", "label": "Manual recon" },
+      { "metric": "Idem", "label": "Duplicate-safe" }
+    ],
+    "stack": ["Go", "Java", "PostgreSQL", "Redis"],
+    "links": { "github": null, "live": null, "case_study": null }
+  },
+  {
+    "id": "payfin-payin",
+    "name": "PayFin — Pay-in Checkout",
+    "category": "Payment Infrastructure",
+    "status": "production",
+    "year": "2025",
+    "summary": "End-to-end checkout supporting UPI, Cards, Netbanking, Wallets with success-probability ranking.",
+    "description": "Merchant-facing checkout that parallelizes bank calls and precomputes payment preferences. Multi-acquirer abstraction enables rapid onboarding of new bank partners.",
+    "features": [
+      "UPI, Cards, Netbanking, Wallets support",
+      "Success-probability based payment-method ranking",
+      "Parallelized bank calls",
+      "Multi-acquirer abstraction (CUB, Axis, Jio)",
+      "Async webhook handling",
+      "Precomputed user payment preferences"
+    ],
+    "architecture": "Go backend · Next.js / React frontend · PostgreSQL · Redis cache",
+    "impact": [
+      { "metric": "14s", "label": "End-to-end checkout" },
+      { "metric": "200", "label": "TPS" },
+      { "metric": "3+", "label": "Acquiring banks" }
+    ],
+    "stack": ["Go", "Next.js", "React", "PostgreSQL", "Redis"],
+    "links": { "github": null, "live": null, "case_study": null }
+  },
+  {
+    "id": "wallet-liquidity",
+    "name": "Wallet & Liquidity Engine",
+    "category": "Payment Infrastructure",
+    "status": "production",
+    "year": "2025",
+    "summary": "Centralized wallet with Redis distributed locking and continuous liquidity rebalancing across partner banks.",
+    "description": "Strict-consistency wallet under high concurrency. Continuously rebalances prefunded capital across partners based on real-time utilization to maximize throughput availability.",
+    "features": [
+      "Redis distributed locking per wallet",
+      "Fencing tokens to prevent stale writes",
+      "Lock TTL for crash recovery",
+      "Real-time liquidity utilization tracking",
+      "Automated capital rebalancing",
+      "Strict transactional consistency"
+    ],
+    "architecture": "Go · Redis (locks) · PostgreSQL (source of truth)",
+    "impact": [
+      { "metric": "Strict", "label": "Consistency" },
+      { "metric": "0", "label": "Race conditions" },
+      { "metric": "Auto", "label": "Rebalancing" }
+    ],
+    "stack": ["Go", "Redis", "PostgreSQL"],
+    "links": { "github": null, "live": null, "case_study": null }
+  },
+  {
+    "id": "chitchaat",
+    "name": "ChitChaat — CPaaS Backend",
+    "category": "Communication Systems",
+    "status": "production",
+    "year": "2025",
+    "summary": "High-throughput messaging across SMS, WhatsApp, RCS using gRPC and Kafka with automated provider failover.",
+    "description": "Multi-channel messaging backend with provider abstraction, automated failover, and a top-up/credit system for managing customer messaging balances.",
+    "features": [
+      "SMS, WhatsApp, RCS channel support",
+      "gRPC inter-service communication",
+      "Kafka-based async message dispatch",
+      "Automated provider failover",
+      "Customer credit / top-up system",
+      "Delivery tracking and receipts"
+    ],
+    "architecture": "Go services · gRPC · Kafka · Redis state · PostgreSQL",
+    "impact": [
+      { "metric": "10K/s", "label": "Messages throughput" },
+      { "metric": "3", "label": "Channels" },
+      { "metric": "Multi", "label": "Provider failover" }
+    ],
+    "stack": ["Go", "gRPC", "Kafka", "Redis"],
+    "links": { "github": null, "live": null, "case_study": null }
+  },
+  {
+    "id": "txn-messaging",
+    "name": "Transactional Messaging Backend",
+    "category": "Communication Systems",
+    "status": "production",
+    "year": "2024",
+    "summary": "SMS notification backend tied to payment events with provider failover and delivery tracking.",
+    "description": "Lightweight, event-driven SMS dispatcher that subscribes to payment events and guarantees customer communication even during provider outages.",
+    "features": [
+      "Payment-event-driven dispatch",
+      "Multi-provider failover",
+      "Delivery tracking",
+      "Retry with backoff",
+      "Structured logging"
+    ],
+    "architecture": "Event consumer · provider abstraction · DLQ for failed sends",
+    "impact": [
+      { "metric": "Multi", "label": "Provider failover" },
+      { "metric": "Live", "label": "Delivery tracking" }
+    ],
+    "stack": ["Go", "Kafka", "Redis"],
+    "links": { "github": null, "live": null, "case_study": null }
+  }
+]
