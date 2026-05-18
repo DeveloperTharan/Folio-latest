@@ -169,14 +169,7 @@ Coursework: Real Analysis, Linear Algebra, Abstract Algebra, Differential Equati
 
 ---
 
-## Running Locally
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:5173](http://localhost:5173)
+Open [https://tharandev.vercel.app/](https://tharandev.vercel.app/)
 
 ---
 
